@@ -23,7 +23,7 @@ def arg_parser():
 def payload(method, parameters):
     no_param_methods = ['get_status']
     int_methods = ['get_blocks', 'get_lastblocks']
-    string_methods = ['get_outputs', 'get_transaction', 'inject_transaction']
+    string_methods = ['get_outputs', 'get_transaction', 'get_address_uxouts', 'inject_transaction']
     status = None
     if method in no_param_methods:
         status = False
@@ -67,4 +67,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
