@@ -20,7 +20,7 @@ EOL
 
 yum -y remove NetworkManager NetworkManager-libnm firewalld
 yum -y update yum
-yum -y install iptables-services ruby gem vim yum-utils deltarpm tmux
+yum -y install iptables-services vim yum-utils deltarpm tmux
 systemctl enable iptables
 yum update -y
 
@@ -43,10 +43,11 @@ timedatectl set-timezone America/Los_Angeles
 echo -e "\e[32m   Done\e[0m"
 echo ""
 
-echo -e "\e[36m== Installing Golang ==\e[0m"
+echo -e "\e[36m== Installing Golang, dep ==\e[0m"
 wget https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz
 tar -xvf go1.9.2.linux-amd64.tar.gz
 mv go /usr/local
+go get -u github.com/golang/dep/cmd/dep
 echo ""
 
 echo -e "\e[36m== Setting GO[PATH,ROOT] & PATH ==\e[0m"
@@ -62,7 +63,8 @@ echo -e "\e[36m== Installing Skywire components ==\e[0m"
 cd ${GOPATH}/src/github.com
 mkdir skycoin && cd $_
 git clone -b dev https://github.com/skycoin/skywire.git
-cd $GOPATH/src/github.com/skycoin/skywire/cmd
+dep ensure
+cd ${GOPATH}/src/github.com/skycoin/skywire/cmd
 go install ./...
 echo ""
 
